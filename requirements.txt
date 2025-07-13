@@ -1,0 +1,7 @@
+flask==3.0.0
+torch==2.2.1
+transformers==4.38.2
+numpy==1.26.3
+python-dotenv==1.0.0
+gunicorn==21.2.0
+pickle5==1.0.1

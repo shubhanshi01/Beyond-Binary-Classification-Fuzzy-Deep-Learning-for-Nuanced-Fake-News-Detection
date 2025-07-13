@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="results-container">
+    <div class="back-button">
+        <a href="/"><i class="fas fa-arrow-left"></i> New Analysis</a>
+    </div>
+
+    <div class="prediction-card">
+        <div class="result-icon">
+            {% if results[0].type == 'Reliable' %}
+            <i class="fas fa-check-circle"></i>
+            {% else %}
+            <i class="fas fa-exclamation-triangle"></i>
+            {% endif %}
+        </div>
+        <h3>Veracity Prediction:
+            <span class="{{ 'reliable' if results[0].type == 'Reliable' else 'unreliable' }}">
+                {{ results[0].label }}
+            </span>
+        </h3>
+        <div class="confidence-meter">
+            <div class="meter-bar" style="width: {{ results[0].confidence }}%"></div>
+            <span>{{ results[0].confidence }}% confidence</span>
+        </div>
+    </div>
+
+    <div class="confidence-breakdown">
+        <h3><i class="fas fa-chart-bar"></i> Detailed Analysis</h3>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Label</th>
+                        <th>Confidence</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ result.label }}</td>
+                        <td>
+                            <div class="confidence-bar-container">
+                                <div class="confidence-bar" style="width: {{ result.confidence }}%"></div>
+                                <span>{{ result.confidence }}%</span>
+                            </div>
+                        </td>
+                        <td class="{{ 'reliable' if result.type == 'Reliable' else 'unreliable' }}">
+                            {{ result.type }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="confidenceChart"></div>
+
+    <div class="share-section">
+        <p>Share these results:</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Visualization code remains the same
+</script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="analysis-form">
+    <h2><i class="fas fa-newspaper"></i> News Statement Analysis</h2>
+    <p>Enter a news statement or claim to check its credibility:</p>
+
+    <form action="/predict" method="POST">
+        <textarea name="news_text" placeholder="Paste the news statement here..." required></textarea>
+        <button type="submit">
+            <i class="fas fa-search"></i> Analyze Statement
+        </button>
+    </form>
+
+    {% if error %}
+    <div class="error-message">
+        <i class="fas fa-exclamation-circle"></i> {{ error }}
+    </div>
+    {% endif %}
+</div>
+
+<div class="info-box">
+    <h3><i class="fas fa-info-circle"></i> How It Works</h3>
+    <ul>
+        <li>Our AI analyzes text using advanced natural language processing</li>
+        <li>Compares against known patterns of misinformation</li>
+        <li>Provides a confidence score for reliability</li>
+    </ul>
+</div>
+{% endblock %}
